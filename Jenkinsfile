@@ -149,7 +149,7 @@ pipeline {
                         echo "Cloud Status:"
                         ./venv/bin/dvc status --cloud
                     else
-                        echo "DVC push failed"
+                        echo "DVC push failed - check logs for details"
                         exit 1
                     fi
                 '''
