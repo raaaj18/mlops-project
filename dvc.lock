@@ -1,109 +1,109 @@
 schema: '2.0'
 stages:
   data_validation:
-    cmd: ./venv/bin/python src/data_validation.py
+    cmd: python src/data_validation.py
     deps:
     - path: data/loan_data.csv
       hash: md5
-      md5: 58cf18ce70ee5f5ff288dc462c4d9746
-      size: 21109
+      md5: 0f33a83dd2063cd24c1f1622af5868ef
+      size: 20905
     - path: src/data_validation.py
       hash: md5
-      md5: 52f3151377592d388dbeede18e998bfb
-      size: 1851
+      md5: 2eab305164ecc221b1686565e6941ac4
+      size: 1909
   clean_data:
-    cmd: ./venv/bin/python src/data_cleaning.py
+    cmd: python src/data_cleaning.py
     deps:
     - path: data/loan_data.csv
       hash: md5
-      md5: 58cf18ce70ee5f5ff288dc462c4d9746
-      size: 21109
+      md5: 0f33a83dd2063cd24c1f1622af5868ef
+      size: 20905
     - path: src/data_cleaning.py
       hash: md5
-      md5: 76b4ced105e01f796b85c8401785d2b4
-      size: 1615
+      md5: 901aebc256522639bb5dbe740aff4b32
+      size: 1673
     outs:
     - path: data/processed/cleaned_data.csv
       hash: md5
-      md5: b0ff775492caee2d0d26339a3805c1e3
-      size: 20424
+      md5: 550e8ebad893e9b58658799834155e9d
+      size: 20724
   feature_engineering:
-    cmd: ./venv/bin/python src/feature_engineering.py
+    cmd: python src/feature_engineering.py
     deps:
     - path: data/processed/cleaned_data.csv
       hash: md5
-      md5: b0ff775492caee2d0d26339a3805c1e3
-      size: 20424
+      md5: 550e8ebad893e9b58658799834155e9d
+      size: 20724
     - path: src/feature_engineering.py
       hash: md5
-      md5: 17ff0b36213c25a015e37ea18e65e137
-      size: 1691
+      md5: b91b6e5b6a471e86eba6cb089117eaed
+      size: 1748
     outs:
     - path: data/processed/featured_data.csv
       hash: md5
-      md5: 44826ee37307becd5a62589756071bb5
-      size: 41191
+      md5: 58d61b0230af76b9b1833d9991f8436c
+      size: 38273
   train:
-    cmd: ./venv/bin/python src/train.py
+    cmd: python src/train.py
     deps:
     - path: data/processed/featured_data.csv
       hash: md5
-      md5: 44826ee37307becd5a62589756071bb5
-      size: 41191
+      md5: 58d61b0230af76b9b1833d9991f8436c
+      size: 38273
     - path: src/preprocess.py
       hash: md5
-      md5: 7c4773f2a44678c7e5fd76666b9790f8
-      size: 2450
+      md5: 250f67acbdc47667def34df80e80ae2e
+      size: 2517
     - path: src/train.py
       hash: md5
-      md5: 1b5e1a9ca30060386213f802ee7dbb7d
-      size: 3542
+      md5: dab1da15e9d48dffdc07f69a414c0654
+      size: 3653
     outs:
     - path: data/processed/test_data.csv
       hash: md5
-      md5: 3cdd393a071e334969aad52dc85922da
-      size: 8357
+      md5: 8eadd40d277f64324c1b198ddfee9eef
+      size: 7758
     - path: models/feature_names.pkl
       hash: md5
-      md5: 41025627f2a39d69c51e44a2e5a37d29
+      md5: 21d9da8aba7c4ba9996a61576ba98d1d
       size: 60
     - path: models/label_encoder.pkl
       hash: md5
-      md5: 69dba1adc1a2d63662dc723a3a0238a1
-      size: 552
+      md5: e45e373d87a9a939bf69767f42450d29
+      size: 495
     - path: models/model.pkl
       hash: md5
-      md5: 9683ad541e225e4ded5710b2b5472643
-      size: 269155
+      md5: c62122c436516eab80d160ebdbf3c0a5
+      size: 256408
     - path: models/scaler.pkl
       hash: md5
-      md5: 3fb8ac43019028d2a35670c83dfabade
-      size: 1063
+      md5: 40095af594b26b13dfa75b5af7442636
+      size: 967
   evaluate:
-    cmd: ./venv/bin/python src/evaluate.py
+    cmd: python src/evaluate.py
     deps:
     - path: data/processed/test_data.csv
       hash: md5
-      md5: 3cdd393a071e334969aad52dc85922da
-      size: 8357
+      md5: 8eadd40d277f64324c1b198ddfee9eef
+      size: 7758
     - path: models/label_encoder.pkl
       hash: md5
-      md5: 69dba1adc1a2d63662dc723a3a0238a1
-      size: 552
+      md5: e45e373d87a9a939bf69767f42450d29
+      size: 495
     - path: models/model.pkl
       hash: md5
-      md5: 9683ad541e225e4ded5710b2b5472643
-      size: 269155
+      md5: c62122c436516eab80d160ebdbf3c0a5
+      size: 256408
     - path: models/scaler.pkl
       hash: md5
-      md5: 3fb8ac43019028d2a35670c83dfabade
-      size: 1063
+      md5: 40095af594b26b13dfa75b5af7442636
+      size: 967
     - path: src/evaluate.py
       hash: md5
-      md5: ba8221f571f1c70b694c9fe748dc5272
-      size: 3559
+      md5: 5f77979e1609c10570feb166876f0b4f
+      size: 3671
     outs:
     - path: metrics.json
       hash: md5
-      md5: b8fb69fee3098eefb485a68d5d89a0ac
-      size: 159
+      md5: 668e124036ba54310b3ced8cbf4a7c40
+      size: 105

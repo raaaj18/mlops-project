@@ -1,4 +1,5 @@
 [core]
+    no_scm = True
     remote = myremote
 ['remote "myremote"']
-    url = s3://mlops-loan-risk-gfg/dvc-storage
+    url = s3://mlops-loan-risk-proj/dvc-storage
